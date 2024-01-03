@@ -1,9 +1,24 @@
+import { useReducer } from "react";
 import Navbar from "./components/Navbar";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
+import { CartContext } from "./store";
+
+
 function App() {
+   const cartReducer = useReducer((state, action) => {
+    console.log(action);
+    switch (action) {
+      default:
+        return state
+    }
+   }, {
+    cartList: [],
+
+   })
+
   return (
-    <div className="App">
+    <CartContext.Provider value={cartReducer}>
 
       <Navbar></Navbar>
 
@@ -21,16 +36,12 @@ function App() {
             {/* 內層格線 */}
             <Cart></Cart>
 
-
-
           </div>
 
         </div>
 
       </div>
-
-
-    </div>
+    </CartContext.Provider>
   );
 }
 
