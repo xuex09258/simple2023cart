@@ -4,7 +4,7 @@ const productsData = [
         id: 'NFrUX98nwTKAzD',
       
           img: 'https://images.unsplash.com/photo-1494390248081-4e521a5940db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1406&q=80',
-      
+                 //'../public/377.jpg',
         price: 120,
       
         title: '鮮果優格餐',
@@ -19,7 +19,8 @@ const productsData = [
       
         price: 210,
       
-        title: '全蔬食健康餐',
+        title: '棉花糖吐司',
+               //'全蔬食健康餐',
       
        },
       
