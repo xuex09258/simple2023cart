@@ -1,34 +1,74 @@
+import { useContext } from "react";
+import { CartContext } from "../store";
+
 export default function Cart() {
-       return (
+  const [state, dispatch] = useContext(CartContext)
+
+  return (   
         <div className="bg-light p-3">
+          {JSON.stringify(state.cartList)}
         <table className="table align-middle">
           <tbody>
-            <tr>
-              <td>
-                <a href="#">x</a>
-              </td>
-              <td>
-                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                  className="table-image"
-                  alt="" />
-              </td>
-              <td>
-                全疏食健康餐
-                <br />
-                <small className="text-muted">NT$ 220</small>
-              </td>
-              <td>
-                <select name="" id="" className="form-select" ></select>
-              </td>
-              <td className="text-end">
-                NT$ 440
-              </td>
-            </tr>
+          {state.cartList.map((item) => {
+                 return (
+                <tr key={item.id}>
+                  <td>
+                    <button type="button" className="btn"
+                    onClick={
+                      () => {
+                        dispatch({
+                          type: 'REMOVE_CART_ITEM',
+                          payload:{
+                            ...item,
+                          }
+                        })
+                      }
+                    }>x</button>
+                  </td>
+                  <td>
+                    <img src={item.img}
+                      className="table-image"
+                      alt="" />
+                  </td>
+                  <td>
+                  {item.title}
+                    <br />
+                    <small className="text-muted">NT$ {item.price}</small>
+                  </td>
+                  <td>
+                    <select name="" id="" className="form-select"
+                    value={item.quantity}
+                    onChange={(e) => {
+                          e.preventDefault();
+                          const quantity = parseInt(e.target.value);
+                          dispatch({
+                            type: 'CHANGE_CART_QUANTITY',
+                            payload:{
+                              ...item,
+                              quantity,
+                            }
+                          })
+                    }}>
+                      {[...Array(20)].map((_, i) => {
+                        return (
+                           <option value={i+1} key={i}>{i + 1}</option>
+                        )
+                      })}
+                    </select>
+                  </td>
+
+                  <td className="text-end">
+                    NT$ {item.price * item.quantity }
+                  </td>
+                </tr>
+              );
+            })}
+            
           </tbody>
           <tfoot>
             <tr>
               <td colSpan={5} className="text-end">
-                總金額 NT$ 440
+                總金額 NT$ {state.total || 0}
               </td>
             </tr>
           </tfoot>
