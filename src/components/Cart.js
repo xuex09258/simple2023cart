@@ -6,7 +6,7 @@ export default function Cart() {
 
   return (   
         <div className="bg-light p-3">
-          {JSON.stringify(state.cartList)}
+    {/* {JSON.stringify(state.cartList)} */} 
         <table className="table align-middle">
           <tbody>
           {state.cartList.map((item) => {
